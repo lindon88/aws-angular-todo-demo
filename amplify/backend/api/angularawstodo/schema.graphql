@@ -1,0 +1,9 @@
+type Todo @model {
+  id: ID!
+  userId: Int
+  title: String!
+  description: String
+  isCompleted: Boolean
+  isFavorite: Boolean
+  dueDate: AWSDateTime
+}
