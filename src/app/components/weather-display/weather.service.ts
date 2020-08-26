@@ -84,7 +84,7 @@ export class WeatherService {
   constructor(private http: HttpClient) { }
 
   public async getWeatherData(city): Promise<any>{
-    return this.http.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=b8a0e128c6f0a28674557665f654bca1').toPromise()
+    return this.http.get('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=b8a0e128c6f0a28674557665f654bca1').toPromise()
       .then((weather: any) => {
 
         if (!weather || !weather.main || !weather.main.temp) {
