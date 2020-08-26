@@ -1,0 +1,40 @@
+<div class="card-container todo-edit">
+  <mat-spinner diameter="50" class="todo-loader" *ngIf="showProgressBar"></mat-spinner>
+  <form *ngIf="!showProgressBar" [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+
+    <mat-form-field class="form-element">
+      <input matInput placeholder="Title" formControlName="title">
+      <mat-error *ngIf="!formGroup.controls['title'].valid && formGroup.controls['title'].touched">
+        Required field
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-element">
+      <textarea matInput placeholder="Description" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" formControlName="description"></textarea>
+      <mat-error *ngIf="!formGroup.controls['description'].valid && formGroup.controls['description'].touched">
+        Required field
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-element" appearance="fill">
+      <mat-label>Due Date</mat-label>
+      <input formControlName="dueDate" matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div class="form-element">
+      <mat-checkbox formControlName="isFavorite" value="1">Favorite</mat-checkbox>
+    </div>
+
+    <div class="form-element">
+      <mat-checkbox formControlName="isCompleted" value="1">Completed</mat-checkbox>
+    </div>
+
+    <div class="form-buttons">
+      <button (click)="cancel($event);" mat-raised-button class="button">Cancel</button>
+      <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Save</button>
+    </div>
+
+  </form>
+</div>

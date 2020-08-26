@@ -25,8 +25,10 @@
     "@aws-amplify/pubsub": "^3.0.18",
     "@aws-amplify/ui-angular": "^0.2.9",
     "aws-amplify": "^3.0.18",
+    "moment": "^2.27.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
+    "weather-icons": "git+https://github.com/erikflowers/weather-icons.git",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {

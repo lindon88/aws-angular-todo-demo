@@ -1,1 +1,59 @@
-<p>todo works!</p>
+<div class="card-container todo-list">
+  <div class="todo-header">
+    <app-weather-display class="todo-weather"></app-weather-display>
+    <app-time-display class="todo-time"></app-time-display>
+  </div>
+  <div class="todo-list-content">
+    <mat-spinner diameter="50" class="todo-loader" *ngIf="showProgressBar"></mat-spinner>
+    <div *ngIf="!showProgressBar" class="todo-tools">
+      <div class="todo-search-btn">
+        <mat-form-field class="example-form-field">
+          <input placeholder="Search" matInput type="text" [(ngModel)]="searchValue">
+<!--          <mat-icon matSuffix>search</mat-icon>-->
+        </mat-form-field>
+      </div>
+      <div class="todo-sort-filter">
+        <div>
+          <button mat-icon-button [matMenuTriggerFor]="filtermenu">
+            <mat-icon>filter_list</mat-icon>
+          </button>
+          <mat-menu #filtermenu="matMenu">
+            <button (click)="visibleFilter = 'all'" mat-menu-item>
+              <mat-icon>apps</mat-icon>
+              <span>All</span>
+            </button>
+            <button (click)="visibleFilter = 'completed'" mat-menu-item>
+              <mat-icon>check_box</mat-icon>
+              <span>Completed</span>
+            </button>
+            <button (click)="visibleFilter = 'not-completed'" mat-menu-item>
+              <mat-icon>check_box_outline_blank</mat-icon>
+              <span>Not Completed</span>
+            </button>
+            <button (click)="visibleFilter = 'favorite'" mat-menu-item>
+              <mat-icon>favorite</mat-icon>
+              <span>Favorite</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+    <mat-list *ngIf="!showProgressBar">
+      <mat-list-item class="todo-item" *ngFor="let todo of todoList | searchPipe: searchValue | todoFilter: visibleFilter">
+        <mat-checkbox class="todo-checkbox" [(ngModel)]="todo.isCompleted" (ngModelChange)="toggleCompleteStatus(todo);"></mat-checkbox>
+        <div (click)="editTodo(todo, $event);" class="todo-item-text">
+          <div class="todo-item-text-title">
+            {{todo?.title}}
+            <div *ngIf="todo.formattedDueDate" class="todo-item-text-date">Due Date: <span>{{todo?.formattedDueDate}}</span></div>
+          </div>
+          <div class="todo-item-text-description">{{todo?.description}}</div>
+        </div>
+        <mat-icon class="todo-fav-icon" (click)="toggleFavoriteStatus(todo, $event);">{{todo.favIcon}}</mat-icon>
+        <mat-icon (click)="removeTodo(todo, $event);">delete</mat-icon>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>
+<button [routerLink]="['/todo-edit']" class="todo-fab-button" mat-mini-fab color="primary" aria-label="Fab Add Button">
+  <mat-icon>add</mat-icon>
+</button>

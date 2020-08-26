@@ -1,0 +1,29 @@
+@import "node_modules/weather-icons/sass/weather-icons.min";
+@import "../../../assets/sass/variables";
+
+.weather-container{
+  display: flex;
+  flex-direction: row;
+
+  .weather-icon{
+    flex: 0;
+    margin-right: 10px;
+    i{
+      color: $dark-gray;
+      font-size: 48px;
+    }
+  }
+
+  .weather-description{
+    color: $dark-gray;
+    flex: auto;
+    text-align: left;
+
+    .weather-temp{
+      font-size: 26px;
+      line-height: 32px;
+    }
+
+  }
+
+}
